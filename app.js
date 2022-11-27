@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const routerUsers = require('./routes/users');
 
 const app = express();
 
@@ -10,6 +11,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+
+app.use(routerUsers);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
