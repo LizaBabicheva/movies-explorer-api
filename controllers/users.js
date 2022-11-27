@@ -1,8 +1,6 @@
 const User = require('../models/user');
 const BadRequestError = require('../errors/bad-request-err');
 
-// # возвращает информацию о пользователе (email и имя)
-// GET /users/me
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
@@ -14,8 +12,6 @@ module.exports.getUserInfo = (req, res, next) => {
     .catch((next));
 };
 
-// # обновляет информацию о пользователе (email и имя)
-// PATCH /users/me
 module.exports.updateUser = (req, res, next) => {
   const { name, email } = req.body;
 
