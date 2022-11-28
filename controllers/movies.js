@@ -17,7 +17,16 @@ module.exports.getMovies = (req, res, next) => {
 // POST /movies
 module.exports.createMovie = (req, res, next) => {
   const {
-    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    nameRU,
+    nameEN,
+    thumbnail,
     movieId,
   } = req.body;
 
