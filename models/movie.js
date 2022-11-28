@@ -52,7 +52,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     required: true,
   },
   nameRU: {
@@ -60,7 +60,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return validator.isAlphanumeric(v, 'ru-RU');
+        return validator.isAlphanumeric(v, 'ru-RU', { ignore: ' ' });
       },
       message: 'Название должно быть на русском языке',
     },
@@ -69,10 +69,12 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: validator.isAlphanumeric,
+      validator(v) {
+        return validator.isAlphanumeric(v, 'en-US', { ignore: ' ' });
+      },
       message: 'Название должно быть на английском языке',
     },
   },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('movie', movieSchema);
