@@ -7,6 +7,7 @@ const routerMovies = require('./routes/movies');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { errorHandler } = require('./utils/errorHandler');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -28,6 +29,8 @@ app.use('*', () => {
 });
 
 app.use(errorLogger);
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
