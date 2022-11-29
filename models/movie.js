@@ -10,11 +10,11 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  duration: {
+  duration: { // Число!!!
     type: Number,
     required: true,
   },
-  year: {
+  year: { // Дата!!!
     type: String,
     required: true,
   },
@@ -58,22 +58,10 @@ const movieSchema = new mongoose.Schema({
   nameRU: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return validator.isAlphanumeric(v, 'ru-RU', { ignore: ' ' });
-      },
-      message: 'Название должно быть на русском языке',
-    },
   },
   nameEN: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return validator.isAlphanumeric(v, 'en-US', { ignore: ' ' });
-      },
-      message: 'Название должно быть на английском языке',
-    },
   },
 }, { versionKey: false });
 

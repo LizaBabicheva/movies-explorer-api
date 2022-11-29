@@ -13,15 +13,11 @@ const userSchema = new mongoose.Schema({
       message: 'Неправильный email',
     },
   },
-  // password — хеш пароля. Обязательное поле-строка.
-  // Нужно задать поведение по умолчанию, чтобы база данных не возвращала это поле.
   password: {
     type: String,
     required: true,
     select: false,
   },
-  // name — имя пользователя, например: Александр или Мария.
-  // Это обязательное поле-строка от 2 до 30 символов.
   name: {
     type: String,
     required: true,

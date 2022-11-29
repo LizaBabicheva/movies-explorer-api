@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { errors } = require('celebrate');
 const routerUsers = require('./routes/users');
 const routerMovies = require('./routes/movies');
 const auth = require('./middlewares/auth');
@@ -29,6 +30,8 @@ app.use('*', () => {
 });
 
 app.use(errorLogger);
+
+app.use(errors());
 
 app.use(errorHandler);
 
