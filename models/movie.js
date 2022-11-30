@@ -10,13 +10,17 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  duration: { // Число!!!
+  duration: {
     type: Number,
     required: true,
   },
-  year: { // Дата!!!
+  year: {
     type: String,
     required: true,
+    validate: {
+      validator: validator.isNumeric,
+      message: 'Некорректный тип данных',
+    },
   },
   description: {
     type: String,
