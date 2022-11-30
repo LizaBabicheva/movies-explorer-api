@@ -1,5 +1,6 @@
 const express = require('express');
 // require('dotenv').config();
+const helmet = require('helmet');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -34,6 +35,8 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 app.use(requestLogger);
 
 app.use(limiter);
+
+app.use(helmet());
 
 app.use(routerUsers);
 app.use('/', auth, routerMovies);
