@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -12,6 +13,14 @@ const { errorHandler } = require('./utils/errorHandler');
 
 const { PORT = 3000 } = process.env;
 const app = express();
+
+app.use(cors({
+  // origin: ['http://mesto.lizababicheva.nomoredomains.icu',
+  //   'https://mesto.lizababicheva.nomoredomains.icu'],
+  credentials: true,
+}));
+
+app.options('*', cors());
 
 app.use(cookieParser());
 
