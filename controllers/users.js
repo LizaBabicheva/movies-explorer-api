@@ -3,16 +3,22 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const BadRequestError = require('../errors/bad-request-err');
 const ConflictError = require('../errors/conflict-err');
+const {
+  badReqErrMessage,
+  emailConflictErrMessage,
+  authSuccessful,
+  signoutMessage,
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
-      // const userWithoutPassword = user.toObject();
-      // delete userWithoutPassword.password;
-      // res.send(userWithoutPassword);
-      res.send({ data: { email: user.email, name: user.name } });
+      const userWithNameAndEmail = user.toObject();
+      delete userWithNameAndEmail.password;
+      delete userWithNameAndEmail._id;
+      res.send(userWithNameAndEmail);
     })
     .catch((next));
 };
@@ -27,7 +33,7 @@ module.exports.updateUser = (req, res, next) => {
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError(err.message));
+        next(new BadRequestError(badReqErrMessage));
         return;
       }
       next(err);
@@ -46,11 +52,11 @@ module.exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError(`Пользователь с email '${email}' уже существует`));
+        next(new ConflictError(emailConflictErrMessage));
         return;
       }
       if (err.name === 'ValidationError') {
-        next(new BadRequestError(err.message));
+        next(new BadRequestError(badReqErrMessage));
         return;
       }
       next(err);
@@ -64,11 +70,11 @@ module.exports.signin = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res.status(200)
         .cookie('authorization', token, { maxAge: 3600000 * 24 * 7, httpOnly: true })
-        .send({ message: 'Успешная авторизация' });
+        .send({ message: authSuccessful });
     })
     .catch(next);
 };
 
 module.exports.signout = (req, res) => {
-  res.clearCookie('authorization').send({ message: 'До свидания!' });
+  res.clearCookie('authorization').send({ message: signoutMessage });
 };
