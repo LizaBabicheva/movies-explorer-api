@@ -2,6 +2,8 @@ const routerMovies = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 
+const { urlRegEx, numRegEx } = require('../utils/constants');
+
 routerMovies.get('/movies', getMovies);
 
 routerMovies.post('/movies', celebrate({
@@ -9,11 +11,11 @@ routerMovies.post('/movies', celebrate({
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().integer().required(),
-    year: Joi.string().required().pattern(/^\d+$/),
+    year: Joi.string().required().pattern(numRegEx),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/),
-    trailerLink: Joi.string().required().pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/),
-    thumbnail: Joi.string().required().pattern(/^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/),
+    image: Joi.string().required().pattern(urlRegEx),
+    trailerLink: Joi.string().required().pattern(urlRegEx),
+    thumbnail: Joi.string().required().pattern(urlRegEx),
     movieId: Joi.string().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
