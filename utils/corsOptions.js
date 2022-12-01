@@ -1,6 +1,6 @@
 const corsOptions = {
-  // origin: ['http://mesto.lizababicheva.nomoredomains.icu',
-  // 'https://mesto.lizababicheva.nomoredomains.icu'],
+  origin: ['http://films.lizab.nomoredomains.club',
+    'https://films.lizab.nomoredomains.club'],
   credentials: true,
 };
 
