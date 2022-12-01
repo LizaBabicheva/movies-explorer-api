@@ -12,6 +12,8 @@ const movieDeletedMessage = 'Фильм удален';
 const authSuccessful = 'Успешная авторизация';
 const signoutMessage = 'До свидания!';
 
+const devDataBase = 'mongodb://localhost:27017/bitfilmsdb';
+
 module.exports = {
   urlRegEx,
   numRegEx,
@@ -24,4 +26,5 @@ module.exports = {
   emailConflictErrMessage,
   authSuccessful,
   signoutMessage,
+  devDataBase,
 };

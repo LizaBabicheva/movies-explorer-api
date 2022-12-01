@@ -14,8 +14,9 @@ const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./utils/errorHandler');
 // const { corsOptions } = require('./utils/corsOptions');
+const { devDataBase } = require('./utils/constants');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DB_PROD_URL } = process.env;
 const app = express();
 
 // app.use(cors(corsOptions));
@@ -27,7 +28,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect(NODE_ENV === 'production' ? DB_PROD_URL : devDataBase);
 
 app.use(requestLogger);
 
