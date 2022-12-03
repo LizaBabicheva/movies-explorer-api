@@ -14,7 +14,7 @@ const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./utils/errorHandler');
 // const { corsOptions } = require('./utils/corsOptions');
-const { devDataBase } = require('./utils/constants');
+const { devDataBase, pathNotFound } = require('./utils/constants');
 
 const { PORT = 3000, NODE_ENV, DB_PROD_URL } = process.env;
 const app = express();
@@ -40,7 +40,7 @@ app.use(routerUsers);
 app.use('/', auth, routerMovies);
 
 app.use('*', () => {
-  throw new NotFoundError('Запрашиваемый путь не найден');
+  throw new NotFoundError(pathNotFound);
 });
 
 app.use(errorLogger);
