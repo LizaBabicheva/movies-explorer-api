@@ -1,4 +1,3 @@
-const urlRegEx = /^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/;
 const numRegEx = /^\d+$/;
 
 const unauthorizedErrMessage = 'Необходима авторизация';
@@ -20,7 +19,6 @@ const pathNotFound = 'Запрашиваемый путь не найден';
 const devDataBase = 'mongodb://localhost:27017/bitfilmsdb';
 
 module.exports = {
-  urlRegEx,
   numRegEx,
   unauthorizedErrMessage,
   badReqErrMessage,
