@@ -32,6 +32,10 @@ module.exports.updateUser = (req, res, next) => {
   })
     .then((user) => res.send({ data: user }))
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictError(emailConflictErrMessage));
+        return;
+      }
       if (err.name === 'ValidationError') {
         next(new BadRequestError(badReqErrMessage));
         return;
