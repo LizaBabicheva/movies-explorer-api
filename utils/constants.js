@@ -1,6 +1,5 @@
 const urlRegEx = /^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/;
 const numRegEx = /^\d+$/;
-const emailRegEx = /^[a-zA-Z0-9_.]+[@]{1}[a-zA-Z0-9]+\.[a-zA-Z]+$/;
 
 const unauthorizedErrMessage = 'Необходима авторизация';
 const badReqErrMessage = 'Переданы некорректные данные';
@@ -17,7 +16,6 @@ const devDataBase = 'mongodb://localhost:27017/bitfilmsdb';
 module.exports = {
   urlRegEx,
   numRegEx,
-  emailRegEx,
   unauthorizedErrMessage,
   badReqErrMessage,
   forbiddenErrMessage,
