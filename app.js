@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const helmet = require('helmet');
-// const cors = require('cors');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -13,15 +13,15 @@ const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./utils/errorHandler');
-// const { corsOptions } = require('./utils/corsOptions');
+const { corsOptions } = require('./utils/corsOptions');
 const { devDataBase, pathNotFound } = require('./utils/constants');
 
 const { PORT = 3000, NODE_ENV, DB_PROD_URL } = process.env;
 const app = express();
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-// app.options('*', cors());
+app.options('*', cors());
 
 app.use(cookieParser());
 
