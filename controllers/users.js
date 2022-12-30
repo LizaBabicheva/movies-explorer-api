@@ -17,7 +17,7 @@ module.exports.getUserInfo = (req, res, next) => {
     .then((user) => {
       const userWithNameAndEmail = user.toObject();
       delete userWithNameAndEmail.password;
-      delete userWithNameAndEmail._id;
+      // delete userWithNameAndEmail._id;
       res.send(userWithNameAndEmail);
     })
     .catch((next));

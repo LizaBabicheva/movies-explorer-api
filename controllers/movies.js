@@ -8,9 +8,12 @@ const {
   movieNotFoundErrMessage,
   movieDeletedMessage,
 } = require('../utils/constants');
+const { logger } = require('../middlewares/logger');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({
+    where: { owner: req.user.id },
+  })
     .then((movies) => res.send({ movies }))
     .catch(next);
 };
@@ -46,6 +49,8 @@ module.exports.createMovie = (req, res, next) => {
   })
     .then((movie) => res.send({ movie }))
     .catch((err) => {
+      logger.error('EXCEPTION!!!!');
+      logger.error(err);
       if (err.name === 'ValidationError') {
         next(new BadRequestError(badReqErrMessage));
         return;
@@ -69,6 +74,8 @@ module.exports.deleteMovie = (req, res, next) => {
       res.status(200).send({ message: movieDeletedMessage });
     })
     .catch((err) => {
+      logger.error('ОШИБКА!!!!');
+      logger.error(err);
       if (err.name === 'CastError') {
         next(new BadRequestError(badReqErrMessage));
         return;

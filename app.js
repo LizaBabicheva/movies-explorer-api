@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const { limiter } = require('./utils/limiter');
+// const { limiter } = require('./utils/limiter');
 const routerUsers = require('./routes/users');
 const routerMovies = require('./routes/movies');
 const auth = require('./middlewares/auth');
@@ -16,7 +16,7 @@ const { errorHandler } = require('./utils/errorHandler');
 const { corsOptions } = require('./utils/corsOptions');
 const { devDataBase, pathNotFound } = require('./utils/constants');
 
-const { PORT = 3000, NODE_ENV, DB_PROD_URL } = process.env;
+const { PORT = 3001, NODE_ENV, DB_PROD_URL } = process.env;
 const app = express();
 
 app.use(cors(corsOptions));
@@ -32,7 +32,7 @@ mongoose.connect(NODE_ENV === 'production' ? DB_PROD_URL : devDataBase);
 
 app.use(requestLogger);
 
-app.use(limiter);
+// app.use(limiter);
 
 app.use(helmet());
 
