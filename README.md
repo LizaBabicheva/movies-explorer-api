@@ -28,4 +28,5 @@ npm run dev — запуск сервера с hot-reload
 
 ## Адрес сервера
 Сервер с бэкендом: https://api.films.lizab.nomoredomains.club/;
+
 Публичный IP-адрес: 158.160.45.161.
